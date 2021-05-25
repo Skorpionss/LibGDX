@@ -7,25 +7,29 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class StarGames extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+	Texture corabl, fonimg;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		corabl = new Texture("corabl.png");
+		fonimg = new Texture("fon.jpg");
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
+
+		ScreenUtils.clear(0,0,0,0);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(fonimg, 0, 0);
+		batch.draw(corabl, 20, 0);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		corabl.dispose();
+		fonimg.dispose();
 	}
 }
