@@ -11,7 +11,7 @@ public class MenuScreen extends BaseScreen {
 
     Texture corabl, fonimg;
     private float w, h;
-    private Vector2 pos;
+    private Vector2 pos,pos2;
     private Vector2 v;
 
     @Override
@@ -22,18 +22,19 @@ public class MenuScreen extends BaseScreen {
         corabl = new Texture("corabl.png");
         fonimg = new Texture("fon.jpg");
         pos = new Vector2();
-        v = new Vector2(2, 1);
+        v = new Vector2();
+        pos2 = new Vector2();
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        pos.add(v);
         ScreenUtils.clear(0, 0, 0, 0);
         batch.begin();
         batch.draw(fonimg, 0, 0, w, h);
         batch.draw(corabl, pos.x, pos.y);
         batch.end();
+        pos.add(v);
     }
 
     @Override
@@ -41,5 +42,12 @@ public class MenuScreen extends BaseScreen {
         super.dispose();
         corabl.dispose();
         fonimg.dispose();
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        pos2.set(screenX, Gdx.graphics.getHeight() - screenY);
+        v.set(pos2.sub(pos).setLength(2f));
+        return super.touchDown(screenX, screenY, pointer, button);
     }
 }
