@@ -34,7 +34,10 @@ public class MenuScreen extends BaseScreen {
         batch.draw(fonimg, 0, 0, w, h);
         batch.draw(corabl, pos.x, pos.y);
         batch.end();
-        pos.add(v);
+        if (pos2.cpy().sub(pos).len() < v.len()){
+            pos.set(pos2);
+        } else {pos.add(v);
+        }
     }
 
     @Override
@@ -47,7 +50,7 @@ public class MenuScreen extends BaseScreen {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         pos2.set(screenX, Gdx.graphics.getHeight() - screenY);
-        v.set(pos2.sub(pos).setLength(2f));
+        v.set(pos2.cpy().sub(pos).setLength(2f));
         return super.touchDown(screenX, screenY, pointer, button);
     }
 }
